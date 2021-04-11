@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>610</x>
+      <y>60</y>
+      <w>360</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>Articulo
+--
+- refArt: int
+- contador: int
+- nombreArt: String
+- precio: double
+- stock: int
+- disponible: boolean {true = (stock &gt; 0)}
+--
++ articulo(String nombreArt,
+          double precio,
+          int stock): ctor
++ getNombreArt(): String
++ getPrecio(): double
++ setPrecio(double precio): void
++ getStock(): int
++ setStock(int ud): void
++ toString(): String
++ almacenarArticulo(Articulo producto): void {stock &gt; 0}
++ actualizarStock(int newStock): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1120</x>
+      <y>60</y>
+      <w>320</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+Almacen
+--
+# productos = new ArrayList(): ArrayList&lt;Articulo&gt;
+--
++ comprobarStockArticulos(int refArt): String
++ printArticulo(int refArt): String
++ delStockArticulo(int refArt, int uds): void
++ addStockArticulo(int refArt, int uds): void
++ printListaArticulos(): String
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1520</x>
+      <y>370</y>
+      <w>300</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>Campania
+--
+- idCampania: int
+- nombreCampania(): String
+- ventasTotales(): double
+--
++ campania(String nombreCampania): ctor
++ getNombreCampania(): String
++ getVentasTotales(): double
+- acualizarVentas(double totalVenta): void
++ toString(): String
+&lt;&lt;Override&gt;&gt;
++ comprobarStockArticulos(int refArt): String
++ printArticulo(int refArt): String
++ delStockArticulo(int refArt, int uds): void
++ addStockArticulo(int refArt, int uds): void
++ printListaArticulos(): String
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1400</x>
+      <y>390</y>
+      <w>140</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2= Almacen
+</panel_attributes>
+    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>960</x>
+      <y>50</y>
+      <w>180</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1..*
+se guarda en &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;160.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>990</x>
+      <y>370</y>
+      <w>270</w>
+      <h>350</h>
+    </coordinates>
+    <panel_attributes>Usuario
+--
+- idUser: int
+- nombreUser: String
+- pass: String
+- esSocio: boolean
+- tienda: Campania
+--
++ usuario(String nombreUsuario): ctor
++ usuario(String nombreUsuario,
+          String pass,
+          boolean esSocio): ctor
++ getIdUser(): int
++ getNombreUser(): String
++ getPass(): String
++ setPass(String pass): void
++ getEsSocio(): boolean
++ setEsSocio(boolean esSocio): void
++ toString(): String
++ convertirSocio(int idUser,
+                 String pass): void
++ hacerPedido(Campania refArt): double
+{esSocio = true}
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1520</x>
+      <y>760</y>
+      <w>320</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>Admninistrativo
+--
+- idAdmin: int
+- nombreAdmin: String
+--
++ administrativo(String nombreAdmin): ctor
++ getNombreAdmin(): String
++ setNombreAdmin(String nombre): void
+- crearCampania(String nombreCampania): void
+- borrarCampania(String nombreCampania): void
+--
+Responsabilidades
+-- Crear campaña
+-- Eliminar campaña</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1590</x>
+      <y>100</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>EmpleadoAlmacen
+--
+-id: Long {composite}
+_-ClassAttribute: Long_
+--
+#Operation(i: int): int
+/+AbstractOperation()/
+--
+Responsibilities
+-- Servir los productos</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>370</y>
+      <w>530</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>/com.cypherstudios.gestionCuenta::CuentaBancaria/
+--
+#titular: Persona
+#codCuentaCliente: CodigoCuenta
+#saldo: double
+#idCuenta: int
+-contador: int
+--
++CuentaBancaria(Persona titular, CodigoCuenta codigoCuenta, double saldo): ctor
++getSaldo(): double
++setSaldo(double saldo): void
++getIdCuenta(): int
++previewCuentas(): void
++buscarCuenta(int idCuenta): int
++toString(): String
++almacenarCuenta(CuentaBancaria cuenta): void
++ingresarEfectivo(): void
++retirarEfectivo(): void
++consultarSaldo(int indice): void
++detallesCuenta(int indice): String
++listarCuentas(CuentaBancaria aux): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1180</x>
+      <y>310</y>
+      <w>150</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+m2=Standard
+m1=Socio</panel_attributes>
+    <additional_attributes>80.0;70.0;120.0;70.0;120.0;10.0;10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1250</x>
+      <y>390</y>
+      <w>170</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=)-
+</panel_attributes>
+    <additional_attributes>140.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>960</x>
+      <y>130</y>
+      <w>130</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=Almacen
+</panel_attributes>
+    <additional_attributes>10.0;20.0;110.0;20.0</additional_attributes>
+  </element>
+</diagram>
